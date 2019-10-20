@@ -2,6 +2,7 @@ package ac.bd.seu.crud.controller;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -48,12 +49,12 @@ public class UserController {
 
     @RequestMapping(value = "/api/users/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<User> getUser(@PathVariable("id") int id) {
-        User user = userInterface.findOne(id);
+        Optional<User> user = userInterface.findById(id);
         if (user == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
 
-        return new ResponseEntity<>(user, HttpStatus.OK);
+        return new ResponseEntity<>(user.get(), HttpStatus.OK);
     }
 
     @RequestMapping(value = "/api/users", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
@@ -73,7 +74,7 @@ public class UserController {
 
     @RequestMapping(value = "/api/users/{id}", method = RequestMethod.DELETE, consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<User> deleteUser(@PathVariable("id") int id, @RequestBody User user) {
-        userInterface.delete(id);
+        userInterface.delete(user);
         return new ResponseEntity<>(user, HttpStatus.NO_CONTENT);
     }
 

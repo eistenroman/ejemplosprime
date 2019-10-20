@@ -1,7 +1,10 @@
 package ac.bd.seu.crud.dao;
 
-import ac.bd.seu.crud.model.User;
+import java.util.List;
+
 import org.springframework.data.repository.CrudRepository;
+
+import ac.bd.seu.crud.model.User;
 
 /**
  * <h1>UserInterface Short Description</h1>
@@ -15,4 +18,5 @@ import org.springframework.data.repository.CrudRepository;
  */
 
 public interface UserInterface extends CrudRepository<User, Integer> {
+	List<User> findByName(String name);
 }

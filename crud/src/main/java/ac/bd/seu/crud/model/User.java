@@ -2,14 +2,11 @@ package ac.bd.seu.crud.model;
 
 import java.io.Serializable;
 
+import javax.persistence.Basic;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
-
-import org.hibernate.validator.constraints.NotBlank;
 
 /**
  * <h1>User Short Description</h1>
@@ -30,13 +27,11 @@ public class User implements Serializable {
 	private static final long serialVersionUID = 1L;
 	@Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @NotNull
-    private int id;
-    @NotBlank
-    @Size(min = 3, max = 255)
+	@Basic(optional = false)
+    private Integer id;
+	@Basic(optional = false)
     private String name;
-    @NotBlank
-    @Size(min = 3, max = 255)
+	@Basic(optional = false)
     private String address;
     
     public User() {
@@ -48,11 +43,11 @@ public class User implements Serializable {
         this.address = address;
     }
 
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
