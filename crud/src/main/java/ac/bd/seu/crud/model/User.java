@@ -1,9 +1,6 @@
 package ac.bd.seu.crud.model;
 
-import ac.bd.seu.crud.controller.UserController;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import org.hibernate.validator.constraints.NotBlank;
+import java.io.Serializable;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,7 +8,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import java.io.Serializable;
+
+import org.hibernate.validator.constraints.NotBlank;
 
 /**
  * <h1>User Short Description</h1>
@@ -24,11 +22,13 @@ import java.io.Serializable;
  * @since 26 Oct 2017 20:50
  */
 
-@Data
-@NoArgsConstructor
 @Entity
 public class User implements Serializable {
-    @Id
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	@Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @NotNull
     private int id;
@@ -38,9 +38,43 @@ public class User implements Serializable {
     @NotBlank
     @Size(min = 3, max = 255)
     private String address;
-
+    
+    public User() {
+    	
+    }
+    
     public User(String name, String address) {
         this.name = name;
         this.address = address;
     }
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", name=" + name + ", address=" + address + "]";
+	}
+    
 }
